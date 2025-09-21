@@ -12,9 +12,9 @@ const Header = () => {
         <nav className="header__nav nav">
           <NavList>
             <NavItem><NavLink>Inicio</NavLink></NavItem>
-            <NavItem><NavLink>Registro</NavLink></NavItem>
+            <NavItem><NavLink>Registro de Guias</NavLink></NavItem>
             <NavItem><NavLink>Lista de Guias</NavLink></NavItem>
-            <NavItem><NavLink>Buscar Guia</NavLink></NavItem>            
+            <NavItem><NavLink>Buscar Guias</NavLink></NavItem>            
           </NavList>
           
         </nav>

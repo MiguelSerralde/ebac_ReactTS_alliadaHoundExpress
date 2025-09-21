@@ -1,5 +1,16 @@
 import styled from "styled-components"
 import Themes from "../../theme/index"
+import { css } from "styled-components"
+
+const formElementStyles = css`
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+
+    &:hover {
+        border: 1px solid black;
+  } 
+`
 
 const BannerSection = styled.section `
     background: ${props => Themes.colors.colorPrimary};
@@ -27,7 +38,25 @@ const ContainerForm = styled.form`
 `
 
 const InputForm = styled.input `
-    font-weight: bold;
+    ${formElementStyles};
+`
+
+const StateSelect = styled.select`
+    ${formElementStyles};   
+`
+
+const FormButton = styled.button `
+    background: ${props => Themes.colors.colorDark};
+    color: ${props => Themes.colors.colorBody};
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+
+    &:hover {
+        opacity: 0.8;        
+    }
 `
 
 export {
@@ -35,5 +64,7 @@ export {
     FormSection,
     TitleH2,
     ContainerForm,
-    InputForm
+    InputForm, 
+    StateSelect,
+    FormButton
 }

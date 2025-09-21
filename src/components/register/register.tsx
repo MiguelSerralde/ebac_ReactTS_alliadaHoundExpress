@@ -1,5 +1,5 @@
 import React from 'react'
-import { BannerSection, ContainerForm, FormSection, TitleH2 } from './index.js'
+import { BannerSection, ContainerForm, FormButton, FormSection, InputForm, StateSelect, TitleH2 } from './index.js'
 
 const Register = () => {
   return (
@@ -14,11 +14,30 @@ const Register = () => {
         <TitleH2>Registro de Nueva Guía</TitleH2>        
         <ContainerForm id='frmRegister'>
             <label><b>Número de Guía</b></label>
-            <input className="form__input" type="text" id="numero" name="numero" required></input>          
+            <InputForm required type='text'/>            
+
+            <label><b>Origen</b></label>
+            <InputForm required type='text'/>            
+
+            <label><b>Destino</b></label>
+            <InputForm required type='text'/>            
+
+            <label><b>Destinatario</b></label>
+            <InputForm required type='text'/>            
+
+            <label><b>Fecha de registro</b></label>
+            <InputForm required type='date'/>            
+
+            <label><b>Estado</b></label>            
+            <StateSelect required>
+                <option value="Pendiente">Pendiente</option>
+                <option value="Transito">En tránsito</option>
+                <option value="Entregado">Entregado</option>       
+            </StateSelect>    
+            <FormButton>Registrar Guia</FormButton>                                
         </ContainerForm>
       </FormSection>      
     </>
   )
 }
-
 export default Register
