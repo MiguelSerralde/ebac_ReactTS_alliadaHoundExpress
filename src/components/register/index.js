@@ -12,7 +12,7 @@ const formElementStyles = css`
   } 
 `
 
-const BannerSection = styled.section `
+const BannerSection = styled.section `    
     background: ${props => Themes.colors.colorPrimary};
     color: white;
     text-align: center;
