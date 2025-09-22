@@ -1,7 +1,28 @@
 import React from 'react'
 import { GuideButton, GuideButtonTd, GuideSection, GuideTable, GuideTd, GuideTh, GuideThead } from '.'
 
-const List = () => {
+
+ export interface Guide {
+        guide: string;
+        origin: string;
+        destiny: string;
+        addressee: string;
+        date: string;
+        state: string;
+    }
+
+
+interface Props {
+    guides: Guide[]
+}
+
+const handleClick = () => {
+    alert("Click")
+}
+
+const List: React.FC<Props> = ({guides}) => {
+       
+
   return (
     <>  
         <GuideSection>
@@ -28,7 +49,7 @@ const List = () => {
                         <GuideTd>2025-08-21</GuideTd>
                         <GuideTd>Pendiente</GuideTd>                        
                         <GuideButtonTd>
-                            <GuideButton>Actualizar</GuideButton>
+                            <GuideButton onClick={handleClick}>Actualizar</GuideButton>
                             <GuideButton>Eliminar</GuideButton>                            
                         </GuideButtonTd>                        
                     </tr>
@@ -44,7 +65,24 @@ const List = () => {
                             <GuideButton>Actualizar</GuideButton>
                             <GuideButton>Eliminar</GuideButton>
                         </GuideButtonTd>                        
-                    </tr>        
+                    </tr> 
+
+                    {
+                        guides.map((g, index) => (
+                            <tr key={index}>
+                                <GuideTd>{g.guide}</GuideTd>
+                                <GuideTd>{g.origin}</GuideTd>
+                                <GuideTd>{g.destiny}</GuideTd>
+                                <GuideTd>{g.addressee}</GuideTd>
+                                <GuideTd>{g.date}</GuideTd>
+                                <GuideTd>{g.state}</GuideTd>
+                                <GuideButtonTd>
+                                   <GuideButton onClick={handleClick}>Actualizar</GuideButton> 
+                                   <GuideButton>Eliminar</GuideButton> 
+                                </GuideButtonTd>
+                            </tr>
+                        ))
+                    }
                 </tbody>
             </GuideTable>            
         </GuideSection>

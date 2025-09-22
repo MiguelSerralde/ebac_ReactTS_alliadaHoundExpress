@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import List, { Guide } from "../../components/list/list.tsx"
 import { BannerSection, ContainerForm, FormButton, FormSection, InputForm, StateSelect, TitleH2 } from './index.js'
 
 const Register = () => {
@@ -12,6 +13,8 @@ const Register = () => {
     state: "Pendiente"
   })
 
+  const [guides, setGuides] = useState<Guide[]>([])
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const {name, value} = e.target
     setForm({
@@ -22,7 +25,16 @@ const Register = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    console.log(form)
+    setGuides([...guides, form])
+    setForm({
+      guide: "",
+      origin: "",
+      destiny: "" , 
+      addressee: "",
+      date: "", 
+      state: "Pendiente"
+    })
+      
   }
 
   return (
@@ -77,7 +89,8 @@ const Register = () => {
             </StateSelect>    
             <FormButton type='submit'>Registrar Guia</FormButton>                                
         </ContainerForm>
-      </FormSection>      
+      </FormSection>    
+      <List guides={guides}/>
     </>
   )
 }
