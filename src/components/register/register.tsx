@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import List, { Guide } from "../../components/list/list.tsx"
+import List, { Props } from "../../components/list/list.tsx"
 import { BannerSection, ContainerForm, FormButton, FormSection, InputForm, StateSelect, TitleH2 } from './index.js'
 
 const Register = () => {
@@ -22,6 +22,22 @@ const Register = () => {
       [name]:value
     })
   }
+
+  const handelUpdate = (index: number) => {
+    
+    setGuides((prev) =>
+        prev.map((g, i) => {
+          if (g.state === "Pendiente" ){
+            g.state = "Transito"        
+          }
+             return g
+        }        
+        ))
+  }
+
+  const handleDelete = (index: number) => {
+    setGuides((prev) => prev.filter((_, i) => i !== index));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
@@ -90,7 +106,7 @@ const Register = () => {
             <FormButton type='submit'>Registrar Guia</FormButton>                                
         </ContainerForm>
       </FormSection>    
-      <List guides={guides}/>
+      <List guides={guides} onUpdate={handelUpdate} onDelete={handleDelete}/>
     </>
   )
 }

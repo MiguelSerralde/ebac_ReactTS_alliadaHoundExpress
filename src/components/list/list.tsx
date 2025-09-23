@@ -2,25 +2,19 @@ import React from 'react'
 import { GuideButton, GuideButtonTd, GuideSection, GuideTable, GuideTd, GuideTh, GuideThead } from '.'
 
 
- export interface Guide {
-        guide: string;
-        origin: string;
-        destiny: string;
-        addressee: string;
-        date: string;
-        state: string;
+ export interface Props {
+        guides: Guide[];       
+        onUpdate: (index: number) => void;
+        onDelete: (index: number) => void;
     }
 
 
-interface Props {
-    guides: Guide[]
-}
-
 const handleClick = () => {
-    alert("Click")
+    
+    alert("Hi")
 }
 
-const List: React.FC<Props> = ({guides}) => {
+const List: React.FC<Props> = ({guides, onUpdate}) => {
        
 
   return (
@@ -77,8 +71,11 @@ const List: React.FC<Props> = ({guides}) => {
                                 <GuideTd>{g.date}</GuideTd>
                                 <GuideTd>{g.state}</GuideTd>
                                 <GuideButtonTd>
-                                   <GuideButton onClick={handleClick}>Actualizar</GuideButton> 
-                                   <GuideButton>Eliminar</GuideButton> 
+                                    {g.state !== "Entregado" ? (
+                                        <GuideButton onClick={()=> onUpdate(index)}>Actualizar</GuideButton>
+                                    ):<></>
+                                    }
+                                   <GuideButton onClick={() => onDelete(index)}>Eliminar</GuideButton> 
                                 </GuideButtonTd>
                             </tr>
                         ))
