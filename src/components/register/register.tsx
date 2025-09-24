@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import List, { Props } from "../../components/list/list.tsx"
 import { BannerSection, ContainerForm, FormButton, FormSection, InputForm, StateSelect, TitleH2 } from './index.js'
 
+
 const Register = () => {
 
   const [form, setForm] = useState({
@@ -26,13 +27,19 @@ const Register = () => {
   const handelUpdate = (index: number) => {
     
     setGuides((prev) =>
-        prev.map((g, i) => {
-          if (g.state === "Pendiente" ){
-            g.state = "Transito"        
+        prev.map((g, i) => {          
+          if (i !== index) return g
+
+          let newState = g.state
+          if(newState === "Pendiente") {
+            newState = "Transito"
+          } else {
+            if(newState === "Transito") newState = "Entregado"
           }
-             return g
-        }        
-        ))
+
+          return {...g, state: newState}
+      }
+    ))
   }
 
   const handleDelete = (index: number) => {
@@ -40,6 +47,14 @@ const Register = () => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
+    setGuides((prev) =>
+        prev.map((g, i) => {         
+            const eGuide: string[] = {...g.index}
+            console.log(eGuide)
+            return g
+         }         
+        ))
+
     e.preventDefault()
     setGuides([...guides, form])
     setForm({

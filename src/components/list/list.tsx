@@ -1,6 +1,14 @@
 import React from 'react'
 import { GuideButton, GuideButtonTd, GuideSection, GuideTable, GuideTd, GuideTh, GuideThead } from '.'
 
+export interface Guide {
+  guide: string;
+  origin: string;
+  destiny: string;
+  addressee: string;
+  date: string;
+  state: string;
+}
 
  export interface Props {
         guides: Guide[];       
@@ -14,7 +22,7 @@ const handleClick = () => {
     alert("Hi")
 }
 
-const List: React.FC<Props> = ({guides, onUpdate}) => {
+const List: React.FC<Props> = ({guides, onUpdate, onDelete}) => {
        
 
   return (
