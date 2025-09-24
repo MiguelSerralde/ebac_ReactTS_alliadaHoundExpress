@@ -55,6 +55,18 @@ const GuideButton = styled.button`
     }
 `
 
+const MessageGudeRepeatP = styled.p`
+    color: red;
+    text-align: center;
+    font-weight: bold;
+`
+
+const MessageP = styled.p`
+    color: green;
+    text-align: center;
+    font-weight: bold;
+`
+
 export {
     GuideSection,
     GuideTable,
@@ -62,5 +74,7 @@ export {
     GuideTh,
     GuideTd,
     GuideButton,
-    GuideButtonTd
+    GuideButtonTd,
+    MessageGudeRepeatP,
+    MessageP
 }

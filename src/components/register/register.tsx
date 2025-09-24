@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import List, { Props } from "../../components/list/list.tsx"
+import List  from "../../components/list/list.tsx"
 import { BannerSection, ContainerForm, FormButton, FormSection, InputForm, StateSelect, TitleH2 } from './index.js'
+import { MessageGudeRepeatP, MessageP } from '../list/index.js'
 
 
 const Register = () => {
@@ -15,6 +16,8 @@ const Register = () => {
   })
 
   const [guides, setGuides] = useState<Guide[]>([])
+  const [ message, setMessage] = useState<String>("")
+  const [ repeatGuide, setRepeatGuide] = useState<String>("")
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const {name, value} = e.target
@@ -30,14 +33,20 @@ const Register = () => {
         prev.map((g, i) => {          
           if (i !== index) return g
 
-          let newState = g.state
+          let newState = g.state          
+          let newDate = new Date()
+          const day = String(newDate.getDate()).padStart(2, '0');
+          const month = String(newDate.getMonth() + 1).padStart(2, '0');
+          const year = newDate.getFullYear();
+          let currentDate = `${year}-${month}-${day}`
+          
           if(newState === "Pendiente") {
-            newState = "Transito"
+            newState = "Transito"            
           } else {
-            if(newState === "Transito") newState = "Entregado"
+            if(newState === "Transito")  newState = "Entregado"
           }
 
-          return {...g, state: newState}
+          return {...g, state: newState, date: currentDate}
       }
     ))
   }
@@ -47,15 +56,16 @@ const Register = () => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    setGuides((prev) =>
-        prev.map((g, i) => {         
-            const eGuide: string[] = {...g.index}
-            console.log(eGuide)
-            return g
-         }         
-        ))
-
     e.preventDefault()
+    const exists = guides.some(g => g.guide === form.guide)
+    if(exists) {      
+      setRepeatGuide("Guia registrada anteriormente")
+      setTimeout(() => setRepeatGuide(""), 2000)
+      return
+    } 
+    
+    setMessage("Guia Registrada con exito")
+    
     setGuides([...guides, form])
     setForm({
       guide: "",
@@ -64,8 +74,9 @@ const Register = () => {
       addressee: "",
       date: "", 
       state: "Pendiente"
-    })
-      
+    })    
+
+    setTimeout(() => setMessage(""), 2000)
   }
 
   return (
@@ -81,38 +92,46 @@ const Register = () => {
         <ContainerForm id='frmRegister'>
             <label><b>Número de Guía</b></label>
             <InputForm required 
-              type='text'
+              type='number'
               name='guide'
+              pattern="[0-9]"
+              value={form.guide}
               onChange={handleChange}
-              />            
+              />
+              {repeatGuide && <MessageGudeRepeatP>{repeatGuide}</MessageGudeRepeatP>}            
 
             <label><b>Origen</b></label>
             <InputForm required 
               type='text'
               name='origin'
+              value={form.origin}
               onChange={handleChange}/>            
 
             <label><b>Destino</b></label>
             <InputForm required 
               type='text'
               name='destiny'
+              value={form.destiny}
               onChange={handleChange}/>            
 
             <label><b>Destinatario</b></label>
             <InputForm required 
               type='text'
               name='addressee'
+              value={form.addressee}
               onChange={handleChange}/>            
 
             <label><b>Fecha de registro</b></label>
             <InputForm required 
               type='date'
               name='date'
+              value={form.date}
               onChange={handleChange}/>            
 
             <label><b>Estado</b></label>            
             <StateSelect required
               name='state'
+              value={form.state}
               onChange={handleChange}>
                 <option value="Pendiente">Pendiente</option>
                 <option value="Transito">En tránsito</option>
@@ -121,6 +140,7 @@ const Register = () => {
             <FormButton type='submit'>Registrar Guia</FormButton>                                
         </ContainerForm>
       </FormSection>    
+      {message && <MessageP>{message}</MessageP>}
       <List guides={guides} onUpdate={handelUpdate} onDelete={handleDelete}/>
     </>
   )

@@ -16,14 +16,7 @@ export interface Guide {
         onDelete: (index: number) => void;
     }
 
-
-const handleClick = () => {
-    
-    alert("Hi")
-}
-
 const List: React.FC<Props> = ({guides, onUpdate, onDelete}) => {
-       
 
   return (
     <>  
@@ -42,33 +35,7 @@ const List: React.FC<Props> = ({guides, onUpdate, onDelete}) => {
                     </tr>
                 </GuideThead>                
                 
-                <tbody >
-                    <tr>
-                        <GuideTd>12345</GuideTd>
-                        <GuideTd>Ciudad A</GuideTd>
-                        <GuideTd>Ciudad B</GuideTd>
-                        <GuideTd>Miguel</GuideTd>
-                        <GuideTd>2025-08-21</GuideTd>
-                        <GuideTd>Pendiente</GuideTd>                        
-                        <GuideButtonTd>
-                            <GuideButton onClick={handleClick}>Actualizar</GuideButton>
-                            <GuideButton>Eliminar</GuideButton>                            
-                        </GuideButtonTd>                        
-                    </tr>
-
-                    <tr >
-                        <GuideTd>54321</GuideTd>
-                        <GuideTd>Ciudad C</GuideTd>
-                        <GuideTd>Ciudad D</GuideTd>
-                        <GuideTd>Leonel</GuideTd>
-                        <GuideTd>2025-01-21</GuideTd>
-                        <GuideTd>En tránsito</GuideTd>                        
-                        <GuideButtonTd>
-                            <GuideButton>Actualizar</GuideButton>
-                            <GuideButton>Eliminar</GuideButton>
-                        </GuideButtonTd>                        
-                    </tr> 
-
+                <tbody > 
                     {
                         guides.map((g, index) => (
                             <tr key={index}>
